@@ -7,4 +7,6 @@ RapeByte is Remotely Triggerable Ransomware that can change itself to avoid dete
 
 **UNDER DEVELOPMENT**
 
+**FULL RELEASE WILL BE MADE IN SOME DAYS STAY TUNED**
+
 ---
