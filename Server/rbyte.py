@@ -1,4 +1,6 @@
 #Rbyte the user server
+#Under Development
+#Updated Everyday
 import socket
 import os
 from termcolor import colored
