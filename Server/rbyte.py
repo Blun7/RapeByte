@@ -119,7 +119,7 @@ def run():
             recv_send_data(usr)
         elif usr  == 'exit':
             recv_send_data(usr)
-            time.sleep(5)
+            time.sleep(3)
             print(colored("[*] Bye See You Later"))
             os.system("echo User Exiting RapeByte:::::[$(date)] >> rbyte.log")
             sys.exit()
