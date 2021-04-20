@@ -2,11 +2,11 @@
 
 ![Capture](https://github.com/SxNade/RapeByte/blob/main/Rbyte.png)
 
-*RapeByte is Remotely Triggerable Ransomware that can change itself to avoid detection from Anti-virus and Anti-malware systems*
+*RapeByte is Remotely Triggerable Ransomware with some capabilities of data exfiltartion also*
 ---
 
-**UNDER ACTIVE DEVELOPMENT ----XX--- GOT BUSY WITH SOMETHING REALLY IMPORTANT**
+**DEVELOPMENT HAS BEEN RESUMED CONTRIBUTIONS ARE WELCOMED**
 
-**FULL RELEASE WILL BE MADE SOON STAY TUNED**
+
 
 ---
