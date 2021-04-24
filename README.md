@@ -5,7 +5,7 @@
 *RapeByte is Remotely Triggerable Ransomware with some capabilities of data exfiltartion also*
 ---
 
-**DEVELOPMENT HAS BEEN RESUMED CONTRIBUTIONS ARE WELCOMED**
+**DEVELOPMENT HAS BEEN HALTED...../// TIME BOUNDED**
 
 
 
